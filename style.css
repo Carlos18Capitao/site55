@@ -345,6 +345,13 @@ body.menu-open .site-nav {
   margin-bottom: 0.2rem;
 }
 
+.hero__media {
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(224, 211, 190, 0.06), rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--line);
+}
+
 .hero__media img {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -374,7 +381,8 @@ body.menu-open .site-nav {
 
 .trust-bar__grid strong,
 .service-card__number,
-.process-step strong {
+.process-step strong,
+.icon-badge {
   display: inline-flex;
   width: 2.2rem;
   height: 2.2rem;
@@ -384,6 +392,17 @@ body.menu-open .site-nav {
   background: rgba(224, 211, 190, 0.12);
   color: var(--accent-strong);
   margin-bottom: 0.6rem;
+}
+
+.service-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icon-badge {
+  border: 1px solid rgba(224, 211, 190, 0.25);
+  font-size: 1rem;
 }
 
 .cards-grid--three {
@@ -500,12 +519,17 @@ body.menu-open .site-nav {
 }
 
 .reveal {
-  opacity: 0;
-  transform: translateY(16px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 400ms ease, transform 400ms ease;
 }
 
-.reveal.is-visible {
+.js-ready .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.js-ready .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
