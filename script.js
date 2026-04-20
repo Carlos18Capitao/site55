@@ -9,6 +9,19 @@ const form = document.querySelector('#booking-form');
 const feedback = document.querySelector('#form-feedback');
 const year = document.querySelector('#current-year');
 const todayInput = document.querySelector('#date');
+const themeToggle = document.querySelector('.theme-toggle');
+
+// Theme: restore saved preference
+const savedTheme = localStorage.getItem('s55-theme');
+if (savedTheme === 'light') body.classList.add('light-mode');
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const isLight = body.classList.toggle('light-mode');
+    localStorage.setItem('s55-theme', isLight ? 'light' : 'dark');
+    themeToggle.setAttribute('aria-label', isLight ? 'Mudar para modo escuro' : 'Mudar para modo claro');
+  });
+}
 
 if (year) {
   year.textContent = new Date().getFullYear();
