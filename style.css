@@ -21,8 +21,9 @@
   --radius-md: 8px;
   --radius-lg: 16px;
   --max: 1200px;
+  --font-heading: 'Antonio', 'Oswald', sans-serif;
   --font-serif: 'Cormorant Garamond','Iowan Old Style','Book Antiqua',Georgia,serif;
-  --font-sans: 'Inter','Segoe UI',Helvetica,Arial,sans-serif;
+  --font-sans: 'Montserrat', 'Segoe UI', Helvetica, Arial, sans-serif;
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -50,7 +51,7 @@ body.menu-open{overflow:hidden}
 .section-heading{margin-bottom:4.5rem;max-width:680px}
 .section-heading p:last-child{font-size:1.05rem;line-height:1.85}
 
-h1,h2,h3{font-family:var(--font-serif);font-weight:400;letter-spacing:-.01em;line-height:1.1;margin:0}
+h1,h2,h3{font-family:var(--font-heading);font-weight:400;letter-spacing:.02em;line-height:1.1;margin:0}
 .section-heading h2,main h2{font-size:clamp(2rem,4vw,3.2rem);margin:.6rem 0 1.2rem}
 .hero h1{font-size:clamp(2.8rem,6.5vw,5.2rem);font-weight:300;letter-spacing:-.02em;line-height:1.05;margin:.75rem 0 1.25rem}
 h3{font-size:1.2rem;font-weight:500;letter-spacing:.01em}
@@ -65,7 +66,7 @@ h3{font-size:1.2rem;font-weight:500;letter-spacing:.01em}
 
 .brand{display:flex;align-items:center;gap:.85rem;transition:opacity .2s}
 .brand:hover{opacity:.8}
-.brand strong{display:block;font-family:var(--font-serif);font-size:1.1rem;font-weight:600;letter-spacing:.05em;color:var(--text)}
+.brand strong{display:block;font-family:var(--font-heading);font-size:1.1rem;font-weight:500;letter-spacing:.1em;color:var(--text)}
 .brand small{display:block;color:var(--muted);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
 .brand__mark{display:inline-grid;place-items:center;width:2.8rem;height:2.8rem;border:1px solid rgba(200,184,154,.35);border-radius:50%;overflow:hidden;flex-shrink:0;transition:border-color .2s,background .2s}
 .brand__mark img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%}
@@ -192,7 +193,7 @@ body.menu-open .site-nav{display:flex}
 .site-footer__brand{display:flex;flex-direction:row;align-items:center;gap:1.75rem}
 .site-footer__logo{width:140px;height:auto;display:block;flex-shrink:0;opacity:.9;transition:opacity .2s}
 .site-footer__logo:hover{opacity:1}
-.site-footer strong{display:block;font-family:var(--font-serif);font-size:1.2rem;letter-spacing:.06em;margin-bottom:.5rem}
+.site-footer strong{display:block;font-family:var(--font-heading);font-size:1.2rem;letter-spacing:.1em;margin-bottom:.5rem}
 .site-footer__links{display:flex;flex-wrap:wrap;gap:1.5rem}
 .site-footer__links a{color:var(--muted);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
 .site-footer__links a:hover{color:var(--accent-light)}
