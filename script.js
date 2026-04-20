@@ -30,8 +30,32 @@ navLinks.forEach((link) => {
   link.addEventListener('click', () => {
     body.classList.remove('menu-open');
     menuToggle?.setAttribute('aria-expanded', 'false');
+    // Active state on click
+    navLinks.forEach((l) => l.classList.remove('is-active'));
+    link.classList.add('is-active');
   });
 });
+
+// Update active nav link based on scroll position
+const sections = document.querySelectorAll('main [id]');
+
+if ('IntersectionObserver' in window && sections.length) {
+  const navObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach((link) => {
+            const href = link.getAttribute('href');
+            link.classList.toggle('is-active', href === `#${id}`);
+          });
+        }
+      });
+    },
+    { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+  );
+  sections.forEach((section) => navObserver.observe(section));
+}
 
 languageButtons.forEach((button) => {
   button.addEventListener('click', () => {
