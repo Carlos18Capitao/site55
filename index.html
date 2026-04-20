@@ -22,15 +22,18 @@
     />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_AO" />
-    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
-    <link rel="preload" as="image" href="assets/images/hero-tailoring.webp" type="image/webp" fetchpriority="high" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="icon" href="assets/icons/sartorial-logo.png" type="image/png" />
+    <link rel="preload" as="image" href="assets/images/designer-cutting.jpg" fetchpriority="high" />
     <link rel="stylesheet" href="style.css" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "Sartorial 55",
-        "image": "assets/images/hero-tailoring.webp",
+        "image": "assets/images/designer-cutting.jpg",
         "description": "Alfaiataria premium em Luanda com atendimento por marcação.",
         "address": {
           "@type": "PostalAddress",
@@ -51,7 +54,9 @@
     <header class="site-header" id="home">
       <div class="container site-header__bar">
         <a class="brand" href="#home" aria-label="Sartorial 55">
-          <span class="brand__mark">S55</span>
+          <span class="brand__mark">
+            <img src="assets/icons/sartorial-logo.png" alt="Sartorial 55" width="36" height="36" />
+          </span>
           <span>
             <strong>Sartorial 55</strong>
             <small>Bespoke tailoring · Luanda</small>
@@ -117,10 +122,9 @@
 
           <div class="hero__media reveal">
             <picture>
-              <source srcset="assets/images/hero-tailoring.webp" type="image/webp" />
               <img
-                src="assets/images/hero-tailoring.png"
-                alt="Interior elegante de alfaiataria premium em Luanda"
+                src="assets/images/designer-cutting.jpg"
+                alt="Alfaiate a cortar tecido premium na Sartorial 55, Luanda"
                 width="960"
                 height="1200"
                 decoding="async"
@@ -256,20 +260,32 @@
         </div>
         <div class="container gallery-grid">
           <figure class="gallery-card reveal">
-            <img src="assets/images/gallery-1.png" loading="lazy" decoding="async" width="800" height="900" alt="Fato elegante em exposição na Sartorial 55" />
-            <figcaption><span data-lang="pt">Fatos executivos</span><span data-lang="en">Executive suits</span></figcaption>
+            <picture>
+              <source srcset="assets/images/gallery-1.webp" type="image/webp" />
+              <img src="assets/images/gallery-1.png" loading="lazy" decoding="async" width="800" height="900" alt="Fato elegante em exposição na Sartorial 55" />
+            </picture>
+            <figcaption><span class="gallery-label"><span data-lang="pt">Fatos executivos</span><span data-lang="en">Executive suits</span></span></figcaption>
           </figure>
           <figure class="gallery-card reveal">
-            <img src="assets/images/gallery-2.png" loading="lazy" decoding="async" width="800" height="900" alt="Mesa com tecidos e detalhes de alfaiataria" />
-            <figcaption><span data-lang="pt">Tecidos selecionados</span><span data-lang="en">Curated fabrics</span></figcaption>
+            <picture>
+              <source srcset="assets/images/gallery-2.webp" type="image/webp" />
+              <img src="assets/images/gallery-2.png" loading="lazy" decoding="async" width="800" height="900" alt="Mesa com tecidos e detalhes de alfaiataria" />
+            </picture>
+            <figcaption><span class="gallery-label"><span data-lang="pt">Tecidos selecionados</span><span data-lang="en">Curated fabrics</span></span></figcaption>
           </figure>
           <figure class="gallery-card reveal">
-            <img src="assets/images/gallery-3.png" loading="lazy" decoding="async" width="800" height="900" alt="Detalhe de camisa premium e acessórios" />
-            <figcaption><span data-lang="pt">Camisas personalizadas</span><span data-lang="en">Custom shirts</span></figcaption>
+            <picture>
+              <source srcset="assets/images/gallery-3.webp" type="image/webp" />
+              <img src="assets/images/gallery-3.png" loading="lazy" decoding="async" width="800" height="900" alt="Detalhe de camisa premium e acessórios" />
+            </picture>
+            <figcaption><span class="gallery-label"><span data-lang="pt">Camisas personalizadas</span><span data-lang="en">Custom shirts</span></span></figcaption>
           </figure>
           <figure class="gallery-card reveal">
-            <img src="assets/images/gallery-4.png" loading="lazy" decoding="async" width="800" height="900" alt="Sapatos clássicos em ambiente premium" />
-            <figcaption><span data-lang="pt">Sapatos clássicos</span><span data-lang="en">Classic shoes</span></figcaption>
+            <picture>
+              <source srcset="assets/images/gallery-4.webp" type="image/webp" />
+              <img src="assets/images/gallery-4.png" loading="lazy" decoding="async" width="800" height="900" alt="Sapatos clássicos em ambiente premium" />
+            </picture>
+            <figcaption><span class="gallery-label"><span data-lang="pt">Sapatos clássicos</span><span data-lang="en">Classic shoes</span></span></figcaption>
           </figure>
         </div>
       </section>
