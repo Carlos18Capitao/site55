@@ -121,7 +121,7 @@ if (form && feedback) {
       'is-success'
     );
 
-    window.open(`https://wa.me/244923550055?text=${text}`, '_blank', 'noopener');
+    window.open(`https://wa.me/244929653400?text=${text}`, '_blank', 'noopener');
     form.reset();
     if (todayInput) {
       todayInput.min = new Date().toISOString().split('T')[0];
