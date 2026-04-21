@@ -1,7 +1,8 @@
 document.documentElement.classList.add('js-ready');
 
 const body = document.body;
-const menuToggle = document.querySelector('.menu-toggle');
+const menuToggles = document.querySelectorAll('.menu-toggle');
+const menuToggle = menuToggles[0];
 const nav = document.querySelector('.site-nav');
 const navLinks = document.querySelectorAll('.site-nav a');
 const languageButtons = document.querySelectorAll('[data-set-language]');
