@@ -280,4 +280,42 @@ body.light-mode .site-footer__logo--dark{display:none}
 @media (max-width:919px){
   .site-header__actions .btn--small{display:none}
   .booking-form{padding:1.5rem}
+
+  /* Hero */
+  .hero__content{text-align:center}
+  .hero__lead{margin-left:auto;margin-right:auto}
+  .hero__actions{justify-content:center}
+  .hero__meta{text-align:left}
+
+  /* Section headings */
+  .section-heading{text-align:center;margin-left:auto;margin-right:auto}
+
+  /* Trust bar */
+  .trust-bar__grid > div{justify-content:center;text-align:center;flex-direction:column;align-items:center}
+
+  /* Cards */
+  .card{text-align:center}
+  .service-card{text-align:center}
+  .service-card__top{justify-content:center;gap:1rem}
+
+  /* Process */
+  .process-step{text-align:center;display:flex;flex-direction:column;align-items:center}
+
+  /* Booking */
+  .booking-copy{text-align:center}
+  .booking-points{align-items:center}
+  .booking-points li{text-align:left}
+
+  /* Contact */
+  .contact-grid .card{text-align:center}
+
+  /* Footer */
+  .site-footer__inner{align-items:center;text-align:center}
+  .site-footer__brand{flex-direction:column;align-items:center;text-align:center}
+  .site-footer__links{justify-content:center}
+  .site-footer__bottom{text-align:center}
+}
+
+@media (max-width:425px){
+  .brand > span:last-child{display:none}
 }
