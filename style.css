@@ -226,7 +226,7 @@ body.light-mode .theme-toggle__icon--sun{display:inline;color:#8c6f4a}
 
 .pgc__img-wrap img{
   width:100%;
-  aspect-ratio:3/4;
+  aspect-ratio:400/450;
   object-fit:cover;
   display:block;
   transition:transform .7s cubic-bezier(.25,.46,.45,.94);

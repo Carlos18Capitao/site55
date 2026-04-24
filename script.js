@@ -256,9 +256,9 @@ function renderGallery() {
         ${item.imageFallback
           ? `<picture>
               <source srcset="${imgSrc}" type="image/webp" />
-              <img src="${imgFallback}" alt="${item.imageAlt}" loading="lazy" decoding="async" width="800" height="900" />
+              <img src="${imgFallback}" alt="${item.imageAlt}" loading="lazy" decoding="async" width="400" height="450" />
             </picture>`
-          : `<img src="${imgSrc}" alt="${item.imageAlt}" loading="lazy" decoding="async" width="800" height="900" />`}
+          : `<img src="${imgSrc}" alt="${item.imageAlt}" loading="lazy" decoding="async" width="400" height="450" />`}
         <span class="pgc__badge" aria-hidden="true">${lang ? item.typeEn : item.type}</span>
       </div>
       <div class="pgc__body">
