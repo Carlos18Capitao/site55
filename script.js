@@ -166,3 +166,193 @@ if (form && feedback) {
     }
   });
 }
+
+/* ─────────────────────────────────────────────────────
+   Premium Gallery Card System
+   ───────────────────────────────────────────────────── */
+
+const galleryItems = [
+  {
+    image: 'assets/images/smooking.svg',
+    imageAlt: 'Smoking executivo Sartorial 55',
+    name: 'Smoking Executivo',
+    namePt: 'Smoking Executivo',
+    nameEn: 'Executive Smoking',
+    type: 'Fato',
+    typeEn: 'Suit',
+    description: 'Corte impecável para ocasiões formais e de cerimónia. Estrutura refinada, lapela de seda e acabamento artesanal.',
+    descriptionEn: 'Impeccable cut for formal and ceremonial occasions. Refined structure, silk lapel and artisanal finishing.',
+  },
+  {
+    image: 'assets/images/blazerbluesport.svg',
+    imageAlt: 'Blazer sport azul Sartorial 55',
+    name: 'Blazer Sport Azul',
+    namePt: 'Blazer Sport Azul',
+    nameEn: 'Blue Sport Blazer',
+    type: 'Casaco',
+    typeEn: 'Jacket',
+    description: 'Equilíbrio entre elegância casual e presença executiva. Tecido premium com textura visível e botões contrastantes.',
+    descriptionEn: 'A balance between casual elegance and executive presence. Premium textured fabric with contrasting buttons.',
+  },
+  {
+    image: 'assets/images/camisa-oxford.jpeg',
+    imageFallback: 'assets/images/camisa-oxford.jpeg',
+    imageAlt: 'Camisa personalizada Sartorial 55',
+    name: 'Camisa Premium',
+    namePt: 'Camisa Premium',
+    nameEn: 'Premium Shirt',
+    type: 'Camisa',
+    typeEn: 'Shirt',
+    description: 'Colarinho feito à medida, canhão duplo e tecido de algodão egipcio de 140 fios. Detalhe que define o visual.',
+    descriptionEn: 'Bespoke collar, double barrel cuff and 140-thread Egyptian cotton fabric. Details that define the look.',
+  },
+  {
+    image: 'assets/images/Oxford.jpeg',
+    imageFallback: 'assets/images/Oxford.jpeg',
+    imageAlt: 'Sapatos clássicos Sartorial 55',
+    name: 'Oxford Clássico',
+    namePt: 'Oxford Clássico',
+    nameEn: 'Classic Oxford',
+    type: 'Sapatos',
+    typeEn: 'Shoes',
+    description: 'Modelo Oxford em couro plena flor, construção Blake Rapid para leveza e durabilidade. Acabamento espelhado.',
+    descriptionEn: 'Full-grain leather Oxford, Blake Rapid construction for lightness and durability. Mirror-polished finish.',
+  },
+];
+
+// ── Render cards ─────────────────────────────────────
+const galleryRoot = document.getElementById('premium-gallery');
+const modal = document.getElementById('gallery-modal');
+const modalBackdrop = document.getElementById('modal-backdrop');
+const modalClose = document.getElementById('modal-close');
+const modalImg = document.getElementById('modal-img');
+const modalType = document.getElementById('modal-type');
+const modalTitle = document.getElementById('modal-title');
+const modalDesc = document.getElementById('modal-desc');
+const modalCta = document.getElementById('modal-cta');
+
+function isEnglish() {
+  return document.body.classList.contains('lang-en');
+}
+
+function renderGallery() {
+  if (!galleryRoot) return;
+  galleryRoot.innerHTML = '';
+
+  galleryItems.forEach((item, index) => {
+    const lang = isEnglish();
+    const article = document.createElement('article');
+    article.className = 'pgc reveal';
+    article.setAttribute('role', 'listitem');
+    article.setAttribute('tabindex', '0');
+    article.setAttribute('aria-label', lang ? item.nameEn : item.namePt);
+
+    // Image source: prefer webp if available
+    const imgSrc = item.image;
+    const imgFallback = item.imageFallback || item.image;
+
+    article.innerHTML = `
+      <div class="pgc__img-wrap">
+        ${item.imageFallback
+          ? `<picture>
+              <source srcset="${imgSrc}" type="image/webp" />
+              <img src="${imgFallback}" alt="${item.imageAlt}" loading="lazy" decoding="async" width="800" height="900" />
+            </picture>`
+          : `<img src="${imgSrc}" alt="${item.imageAlt}" loading="lazy" decoding="async" width="800" height="900" />`}
+        <span class="pgc__badge" aria-hidden="true">${lang ? item.typeEn : item.type}</span>
+      </div>
+      <div class="pgc__body">
+        <h3 class="pgc__name">${lang ? item.nameEn : item.namePt}</h3>
+        <p class="pgc__desc">${lang ? item.descriptionEn : item.description}</p>
+        <button class="pgc__cta" type="button" data-index="${index}" aria-haspopup="dialog">
+          <span data-lang="pt">Ver Detalhes</span><span data-lang="en" ${!lang ? 'style="display:none"' : ''}>View Details</span>
+        </button>
+      </div>`;
+
+    galleryRoot.appendChild(article);
+  });
+
+  // Re-observe new .reveal elements
+  if ('IntersectionObserver' in window) {
+    const newReveal = galleryRoot.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    newReveal.forEach((el) => obs.observe(el));
+  } else {
+    galleryRoot.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-visible'));
+  }
+}
+
+// ── Open modal ───────────────────────────────────────
+function openModal(index) {
+  const item = galleryItems[index];
+  if (!item || !modal) return;
+
+  const lang = isEnglish();
+  const imgSrc = item.imageFallback || item.image;
+
+  modalImg.src = imgSrc;
+  modalImg.alt = item.imageAlt;
+  modalType.textContent = lang ? item.typeEn : item.type;
+  modalTitle.textContent = lang ? item.nameEn : item.namePt;
+  modalDesc.textContent = lang ? item.descriptionEn : item.description;
+
+  // Sync bilingual spans in modal CTA
+  if (modalCta) {
+    modalCta.querySelectorAll('[data-lang]').forEach((el) => {
+      el.style.display = (el.dataset.lang === 'pt' && !lang) || (el.dataset.lang === 'en' && lang) ? 'inline' : 'none';
+    });
+  }
+
+  modal.removeAttribute('hidden');
+  document.body.style.overflow = 'hidden';
+  modalClose.focus();
+}
+
+function closeModal() {
+  if (!modal) return;
+  modal.setAttribute('hidden', '');
+  document.body.style.overflow = '';
+}
+
+// ── Event delegation for card CTAs ──────────────────
+if (galleryRoot) {
+  galleryRoot.addEventListener('click', (e) => {
+    const btn = e.target.closest('.pgc__cta');
+    if (btn) openModal(Number(btn.dataset.index));
+  });
+
+  galleryRoot.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      const btn = e.target.closest('.pgc__cta');
+      if (btn) { e.preventDefault(); openModal(Number(btn.dataset.index)); }
+    }
+  });
+}
+
+if (modalClose) modalClose.addEventListener('click', closeModal);
+if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modal && !modal.hasAttribute('hidden')) closeModal();
+});
+
+// Re-render when language toggles so card text & badges update
+languageButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    // Slight delay ensures body class is toggled first
+    setTimeout(renderGallery, 0);
+  });
+});
+
+// Initial render
+renderGallery();
