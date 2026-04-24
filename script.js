@@ -12,6 +12,21 @@ const year = document.querySelector('#current-year');
 const todayInput = document.querySelector('#date');
 const themeToggle = document.querySelector('.theme-toggle');
 
+// --- Security helpers ---
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function sanitizeText(str) {
+  // remove script tags and control characters
+  return String(str).replace(/<\/?script[^>]*>/gi, '').replace(/[\x00-\x1F\x7F]/g, '').trim();
+}
+
 // Theme: restore saved preference
 const savedTheme = localStorage.getItem('s55-theme');
 if (savedTheme === 'light') body.classList.add('light-mode');
@@ -128,6 +143,24 @@ if ('IntersectionObserver' in window) {
 }
 
 if (form && feedback) {
+  // Helpers to show/clear per-field errors
+  const setFieldError = (fieldId, message) => {
+    const el = document.getElementById(`error-${fieldId}`);
+    if (el) el.textContent = message;
+    const input = document.getElementById(fieldId);
+    if (input) input.setAttribute('aria-invalid', 'true');
+  };
+
+  const clearFieldErrors = () => {
+    ['name', 'phone', 'service', 'date', 'notes'].forEach((id) => {
+      const el = document.getElementById(`error-${id}`);
+      if (el) el.textContent = '';
+      const input = document.getElementById(id);
+      if (input) input.removeAttribute('aria-invalid');
+    });
+    feedback.textContent = '';
+    feedback.classList.remove('is-error', 'is-success');
+  };
   form.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -138,6 +171,11 @@ if (form && feedback) {
     const date = String(formData.get('date') || '').trim();
     const notes = String(formData.get('notes') || '').trim();
     const isEnglish = body.classList.contains('lang-en');
+
+  // Validate against HTML patterns as a second line of defence
+  const namePattern = /^[A-Za-zÀ-ÖØ-öø-ÿ'\- ]{2,80}$/;
+  const phonePattern = /^[+()\d\s-]{9,20}$/;
+  const notesPattern = /^([\s\S]{0,500})$/;
 
     const phoneDigits = phone.replace(/\D/g, '');
     const selectedDate = new Date(date + 'T00:00:00');
@@ -150,33 +188,59 @@ if (form && feedback) {
       feedback.classList.add(type);
     };
 
+    // Clear prior field errors
+    clearFieldErrors();
+
     if (!name || !phone || !service || !date) {
-      setMessage(
-        isEnglish ? 'Please fill in all required fields.' : 'Preencha todos os campos obrigatórios.',
-        'is-error'
-      );
+      if (!name) setFieldError('name', isEnglish ? 'Name is required.' : 'Nome obrigatório.');
+      if (!phone) setFieldError('phone', isEnglish ? 'Phone is required.' : 'Telefone obrigatório.');
+      if (!service) setFieldError('service', isEnglish ? 'Service selection is required.' : 'Selecção de serviço obrigatória.');
+      if (!date) setFieldError('date', isEnglish ? 'Preferred date is required.' : 'Data pretendida obrigatória.');
+      setMessage(isEnglish ? 'Please fill required fields.' : 'Preencha os campos obrigatórios.', 'is-error');
+      return;
+    }
+
+    // enforce pattern checks
+    if (!namePattern.test(name)) {
+      setFieldError('name', isEnglish ? 'Enter a valid name.' : 'Introduza um nome válido.');
+      setMessage(isEnglish ? 'Please correct the highlighted fields.' : 'Corrija os campos assinalados.', 'is-error');
+      return;
+    }
+
+    if (!phonePattern.test(phone)) {
+      setFieldError('phone', isEnglish ? 'Enter a valid phone number.' : 'Introduza um número de telefone válido.');
+      setMessage(isEnglish ? 'Please correct the highlighted fields.' : 'Corrija os campos assinalados.', 'is-error');
       return;
     }
 
     if (phoneDigits.length < 9) {
-      setMessage(
-        isEnglish ? 'Enter a valid phone number.' : 'Introduza um número de telefone válido.',
-        'is-error'
-      );
+      setFieldError('phone', isEnglish ? 'Phone must contain at least 9 digits.' : 'O telefone deve ter pelo menos 9 dígitos.');
+      setMessage(isEnglish ? 'Please correct the highlighted fields.' : 'Corrija os campos assinalados.', 'is-error');
+      return;
+    }
+
+    if (!notesPattern.test(notes)) {
+      setFieldError('notes', isEnglish ? 'Notes contain invalid characters.' : 'Notas com caracteres inválidos.');
+      setMessage(isEnglish ? 'Please correct the highlighted fields.' : 'Corrija os campos assinalados.', 'is-error');
       return;
     }
 
     if (Number.isNaN(selectedDate.getTime()) || selectedDate < today) {
-      setMessage(
-        isEnglish ? 'Choose a valid future date.' : 'Escolha uma data futura válida.',
-        'is-error'
-      );
+      setFieldError('date', isEnglish ? 'Choose a valid future date.' : 'Escolha uma data futura válida.');
+      setMessage(isEnglish ? 'Please correct the highlighted fields.' : 'Corrija os campos assinalados.', 'is-error');
       return;
     }
 
+    // Sanitize values before encoding
+    const safeName = escapeHtml(sanitizeText(name));
+    const safePhone = escapeHtml(sanitizeText(phone));
+    const safeService = escapeHtml(sanitizeText(service));
+    const safeDate = escapeHtml(sanitizeText(date));
+    const safeNotes = escapeHtml(sanitizeText(notes || (isEnglish ? 'None' : 'Sem notas')));
+
     const text = isEnglish
-      ? `Hello Sartorial 55, I would like to book an appointment.%0A%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0AService: ${encodeURIComponent(service)}%0APreferred date: ${encodeURIComponent(date)}%0ANotes: ${encodeURIComponent(notes || 'None')}`
-      : `Olá Sartorial 55, gostaria de agendar um atendimento.%0A%0ANome: ${encodeURIComponent(name)}%0ATelefone: ${encodeURIComponent(phone)}%0AServiço: ${encodeURIComponent(service)}%0AData pretendida: ${encodeURIComponent(date)}%0ANotas: ${encodeURIComponent(notes || 'Sem notas')}`;
+      ? `Hello Sartorial 55, I would like to book an appointment.%0A%0AName: ${encodeURIComponent(safeName)}%0APhone: ${encodeURIComponent(safePhone)}%0AService: ${encodeURIComponent(safeService)}%0APreferred date: ${encodeURIComponent(safeDate)}%0ANotes: ${encodeURIComponent(safeNotes)}`
+      : `Olá Sartorial 55, gostaria de agendar um atendimento.%0A%0ANome: ${encodeURIComponent(safeName)}%0ATelefone: ${encodeURIComponent(safePhone)}%0AServiço: ${encodeURIComponent(safeService)}%0AData pretendida: ${encodeURIComponent(safeDate)}%0ANotas: ${encodeURIComponent(safeNotes)}`;
 
     setMessage(
       isEnglish ? 'Valid request. Redirecting to WhatsApp...' : 'Pedido válido. A redirecionar para o WhatsApp...',

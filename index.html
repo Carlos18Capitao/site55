@@ -304,15 +304,18 @@
           <form class="booking-form reveal" id="booking-form" novalidate>
             <div class="form-row">
               <label for="name"><span data-lang="pt">Nome</span><span data-lang="en">Name</span></label>
-              <input id="name" name="name" type="text" autocomplete="name" required />
+              <div id="error-name" class="field-error" aria-live="polite"></div>
+              <input id="name" name="name" type="text" autocomplete="name" required maxlength="80" pattern="^[A-Za-zÀ-ÖØ-öø-ÿ'\- ]{2,80}$" inputmode="text" aria-describedby="error-name form-feedback" />
             </div>
             <div class="form-row">
               <label for="phone"><span data-lang="pt">Telefone</span><span data-lang="en">Phone</span></label>
-              <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+244 900 000 000" required />
+              <div id="error-phone" class="field-error" aria-live="polite"></div>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+244 900 000 000" required maxlength="20" pattern="^[+()\d\s-]{9,20}$" inputmode="tel" aria-describedby="error-phone form-feedback" />
             </div>
             <div class="form-row">
               <label for="service"><span data-lang="pt">Serviço</span><span data-lang="en">Service</span></label>
-              <select id="service" name="service" required>
+              <div id="error-service" class="field-error" aria-live="polite"></div>
+              <select id="service" name="service" required aria-describedby="error-service form-feedback">
                 <option value="">Selecione / Select</option>
                 <option value="Fato sob medida / Bespoke suit">Fato sob medida / Bespoke suit</option>
                 <option value="Camisa personalizada / Custom shirt">Camisa personalizada / Custom shirt</option>
@@ -322,11 +325,13 @@
             </div>
             <div class="form-row">
               <label for="date"><span data-lang="pt">Data pretendida</span><span data-lang="en">Preferred date</span></label>
-              <input id="date" name="date" type="date" required />
+              <div id="error-date" class="field-error" aria-live="polite"></div>
+              <input id="date" name="date" type="date" required aria-describedby="error-date form-feedback" />
             </div>
             <div class="form-row">
               <label for="notes"><span data-lang="pt">Notas opcionais</span><span data-lang="en">Optional notes</span></label>
-              <textarea id="notes" name="notes" rows="4" placeholder="Cerimónia, contexto profissional, preferências..."></textarea>
+              <div id="error-notes" class="field-error" aria-live="polite"></div>
+              <textarea id="notes" name="notes" rows="4" maxlength="500" placeholder="Cerimónia, contexto profissional, preferências..."></textarea>
             </div>
             <p class="form-note">
               <span data-lang="pt">Ao submeter, aceita o tratamento dos dados enviados conforme a nossa</span>
