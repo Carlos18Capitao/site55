@@ -342,6 +342,15 @@ if (galleryRoot) {
 if (modalClose) modalClose.addEventListener('click', closeModal);
 if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
 
+if (modalCta) {
+  modalCta.addEventListener('click', (e) => {
+    e.preventDefault();
+    closeModal();
+    const booking = document.getElementById('booking');
+    if (booking) booking.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && modal && !modal.hasAttribute('hidden')) closeModal();
 });
