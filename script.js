@@ -54,20 +54,44 @@ navLinks.forEach((link) => {
 const sections = document.querySelectorAll('main [id]');
 
 if ('IntersectionObserver' in window && sections.length) {
+  // Track which sections are currently visible and pick the topmost one
+  const visibleSections = new Set();
+
+  const setActiveLink = () => {
+    if (!visibleSections.size) return;
+
+    // Among all visible sections, activate the one closest to the top of the viewport
+    let topmost = null;
+    let topmostY = Infinity;
+    visibleSections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) {
+        const y = Math.abs(el.getBoundingClientRect().top);
+        if (y < topmostY) { topmostY = y; topmost = id; }
+      }
+    });
+
+    navLinks.forEach((link) => {
+      link.classList.toggle('is-active', link.getAttribute('href') === `#${topmost}`);
+    });
+  };
+
   const navObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
+        const id = entry.target.getAttribute('id');
         if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          navLinks.forEach((link) => {
-            const href = link.getAttribute('href');
-            link.classList.toggle('is-active', href === `#${id}`);
-          });
+          visibleSections.add(id);
+        } else {
+          visibleSections.delete(id);
         }
       });
+      setActiveLink();
     },
-    { rootMargin: '-40% 0px -55% 0px', threshold: 0 }
+    // Fires when any part of the section is within the middle 60% of the viewport
+    { rootMargin: '-10% 0px -30% 0px', threshold: 0 }
   );
+
   sections.forEach((section) => navObserver.observe(section));
 }
 
