@@ -46,6 +46,10 @@ function updateLogos() {
   document.querySelectorAll('.site-footer__logo').forEach((img) => {
     try { img.src = isLight ? darkSrc : lightSrc; } catch (e) { /* ignore */ }
   });
+
+  // WhatsApp float icon
+  const waImg = document.querySelector('.whatsapp-float img');
+  if (waImg) waImg.src = isLight ? 'assets/icons/whatsapp.png' : 'assets/icons/whatsapp-4-black.png';
 }
 
 // ensure logos reflect saved theme on load
