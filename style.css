@@ -95,7 +95,7 @@ h3{font-size:1.2rem;font-weight:500;letter-spacing:.01em}
 .brand:hover{opacity:.8}
 .brand strong{display:block;font-family:var(--font-heading);font-size:1.1rem;font-weight:500;letter-spacing:.1em;color:var(--text)}
 .brand small{display:block;color:var(--muted);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
-.brand__mark{display:inline-grid;place-items:center;width:160px;height:auto;border:0;border-radius:0;overflow:visible;flex-shrink:0;transition:border-color .2s,background .2s}
+.brand__mark{display:inline-grid;place-items:center;width:230px;height:auto;border:0;border-radius:0;overflow:visible;flex-shrink:0;transition:border-color .2s,background .2s}
 .brand__mark img{width:100%;height:auto;object-fit:contain;display:block;border-radius:0}
 .brand__logo--light{display:none}
 body.light-mode .brand__logo--light{display:block}
