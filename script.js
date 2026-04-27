@@ -31,6 +31,26 @@ function sanitizeText(str) {
 const savedTheme = localStorage.getItem('s55-theme');
 if (savedTheme === 'light') body.classList.add('light-mode');
 
+// Update header/footer logo sources according to theme class
+function updateLogos() {
+  const isLight = body.classList.contains('light-mode');
+  const lightSrc = 'assets/icons/logo-white-letter.svg';
+  const darkSrc = 'assets/icons/logo-black-letter.svg';
+
+  // Header brand logos
+  document.querySelectorAll('.brand__logo').forEach((img) => {
+    try { img.src = isLight ? lightSrc : darkSrc; } catch (e) { /* ignore */ }
+  });
+
+  // Footer logo(s)
+  document.querySelectorAll('.site-footer__logo').forEach((img) => {
+    try { img.src = isLight ? lightSrc : darkSrc; } catch (e) { /* ignore */ }
+  });
+}
+
+// ensure logos reflect saved theme on load
+updateLogos();
+
 if (themeToggles.length) {
   const syncThemeAria = (isLight) => {
     themeToggles.forEach((btn) => btn.setAttribute('aria-label', isLight ? 'Mudar para modo escuro' : 'Mudar para modo claro'));
@@ -41,6 +61,7 @@ if (themeToggles.length) {
       const isLight = body.classList.toggle('light-mode');
       localStorage.setItem('s55-theme', isLight ? 'light' : 'dark');
       syncThemeAria(isLight);
+  updateLogos();
     });
   });
 
