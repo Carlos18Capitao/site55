@@ -25,8 +25,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
-    <link rel="icon" href="assets/icons/sartorial-logo.png" type="image/png" />
-    <link rel="preload" as="image" href="assets/images/taylor.jpg" fetchpriority="high" />
+  <link rel="icon" href="assets/icons/logo-black-letter.svg" type="image/svg+xml" />
+  <link rel="preload" as="image" href="assets/icons/logo-black-letter.svg" fetchpriority="high" />
     <link rel="stylesheet" href="style.css" />
     <script type="application/ld+json">
       {
@@ -55,12 +55,12 @@
       <div class="container site-header__bar">
         <a class="brand" href="#home" aria-label="Sartorial 55">
           <span class="brand__mark">
-            <img src="assets/icons/sartorial-logo.png" alt="Sartorial 55" width="36" height="36" />
+            <picture>
+              <source srcset="assets/icons/logo-white-letter.svg" media="(prefers-color-scheme: dark)" />
+              <img src="assets/icons/logo-black-letter.svg" alt="Sartorial 55" width="36" height="36" decoding="async" loading="eager" />
+            </picture>
           </span>
-          <span>
-            <strong>Sartorial 55</strong>
-            <small>Bespoke tailoring</small>
-          </span>
+          
         </a>
 
         <nav class="site-nav" id="site-nav" aria-label="Navegação principal">
@@ -377,8 +377,10 @@
     <footer class="site-footer">
       <div class="container site-footer__inner">
         <div class="site-footer__brand">
-          <img src="assets/images/LOGOTIPONEGATIVO-01.png" alt="Sartorial 55" class="site-footer__logo site-footer__logo--dark" width="180" height="auto" loading="lazy" />
-          <img src="assets/images/AUTOCOLANTES 22.10.2024.png" alt="Sartorial 55" class="site-footer__logo site-footer__logo--light" width="180" height="auto" loading="lazy" />
+          <picture>
+            <source srcset="assets/icons/logo-white-letter.svg" media="(prefers-color-scheme: dark)" />
+            <img src="assets/icons/logo-black-letter.svg" alt="Sartorial 55" class="site-footer__logo" width="180" height="auto" loading="lazy" />
+          </picture>
           <p>
             <span data-lang="pt">Alfaiataria premium em Luanda com atendimento por marcação.</span>
             <span data-lang="en">Premium tailoring in Luanda with private appointments.</span>
