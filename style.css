@@ -130,6 +130,20 @@ body.light-mode .theme-toggle__icon--sun{display:inline;color:#8c6f4a}
   .menu-toggle{display:none}
 }
 
+/* Mobile: show language/theme controls inside the menu for narrow screens */
+@media (max-width:425px){
+  /* hide header controls (originals) to avoid duplicates */
+  .site-header__actions .lang-switch,
+  .site-header__actions .theme-toggle{
+    display:none;
+  }
+
+  /* style mobile controls inside nav */
+  .site-nav .mobile-controls{display:flex;flex-direction:column;gap:.75rem;padding-top:1rem;border-top:1px solid var(--line);}
+  .site-nav .mobile-controls .lang-switch{align-self:flex-start}
+  .site-nav .mobile-controls .theme-toggle{width:auto;padding:.5rem 1rem;border-radius:6px}
+}
+
 /* Buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border-radius:0;padding:1rem 2.2rem;border:1px solid #ffffff;background:#0a0a0a;color:#ffffff;font-weight:600;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;transition:transform 200ms,background 200ms,box-shadow 200ms;cursor:pointer}
 .btn:hover,.btn:focus-visible{transform:translateY(-2px);background:#1a1a1a;box-shadow:0 8px 30px rgba(0,0,0,.5)}

@@ -5,12 +5,12 @@ const menuToggles = document.querySelectorAll('.menu-toggle');
 const menuToggle = menuToggles[0];
 const nav = document.querySelector('.site-nav');
 const navLinks = document.querySelectorAll('.site-nav a');
-const languageButtons = document.querySelectorAll('[data-set-language]');
+const languageButtons = Array.from(document.querySelectorAll('[data-set-language]'));
 const form = document.querySelector('#booking-form');
 const feedback = document.querySelector('#form-feedback');
 const year = document.querySelector('#current-year');
 const todayInput = document.querySelector('#date');
-const themeToggle = document.querySelector('.theme-toggle');
+const themeToggles = Array.from(document.querySelectorAll('.theme-toggle'));
 
 // --- Security helpers ---
 function escapeHtml(str) {
@@ -31,12 +31,21 @@ function sanitizeText(str) {
 const savedTheme = localStorage.getItem('s55-theme');
 if (savedTheme === 'light') body.classList.add('light-mode');
 
-if (themeToggle) {
-  themeToggle.addEventListener('click', () => {
-    const isLight = body.classList.toggle('light-mode');
-    localStorage.setItem('s55-theme', isLight ? 'light' : 'dark');
-    themeToggle.setAttribute('aria-label', isLight ? 'Mudar para modo escuro' : 'Mudar para modo claro');
+if (themeToggles.length) {
+  const syncThemeAria = (isLight) => {
+    themeToggles.forEach((btn) => btn.setAttribute('aria-label', isLight ? 'Mudar para modo escuro' : 'Mudar para modo claro'));
+  };
+
+  themeToggles.forEach((t) => {
+    t.addEventListener('click', () => {
+      const isLight = body.classList.toggle('light-mode');
+      localStorage.setItem('s55-theme', isLight ? 'light' : 'dark');
+      syncThemeAria(isLight);
+    });
   });
+
+  // Ensure aria labels reflect current theme on load
+  syncThemeAria(body.classList.contains('light-mode'));
 }
 
 if (year) {
@@ -117,7 +126,7 @@ languageButtons.forEach((button) => {
     document.documentElement.lang = lang === 'en' ? 'en' : 'pt-AO';
 
     languageButtons.forEach((btn) => {
-      btn.classList.toggle('is-active', btn === button);
+      btn.classList.toggle('is-active', btn.dataset.setLanguage === lang);
     });
   });
 });
