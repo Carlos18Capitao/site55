@@ -782,9 +782,20 @@ body.light-mode .theme-toggle__icon--sun {
 /* ── Premium Gallery Cards ─────────────────────────── */
 #premium-gallery {
   display: grid;
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
+  gap: .9rem;
+  background: transparent;
+  border: 0;
+}
+
+.gallery-photo {
+  overflow: hidden;
+}
+
+.gallery-photo img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  display: block;
 }
 
 .pgc {
