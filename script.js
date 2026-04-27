@@ -39,12 +39,12 @@ function updateLogos() {
 
   // Header brand logos
   document.querySelectorAll('.brand__logo').forEach((img) => {
-    try { img.src = isLight ? lightSrc : darkSrc; } catch (e) { /* ignore */ }
+    try { img.src = isLight ? darkSrc : lightSrc; } catch (e) { /* ignore */ }
   });
 
   // Footer logo(s)
   document.querySelectorAll('.site-footer__logo').forEach((img) => {
-    try { img.src = isLight ? lightSrc : darkSrc; } catch (e) { /* ignore */ }
+    try { img.src = isLight ? darkSrc : lightSrc; } catch (e) { /* ignore */ }
   });
 }
 
