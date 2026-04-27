@@ -13,6 +13,9 @@
   --muted: #8a877f;
   --line: rgba(255,255,255,0.08);
   --line-strong: rgba(255,255,255,0.14);
+  /* Brighter white borders for premium contrast */
+  --line: rgba(255,255,255,0.18);
+  --line-strong: rgba(255,255,255,0.28);
   --accent: #c8b89a;
   --accent-light: #e4d5be;
   --accent-dim: rgba(200,184,154,0.12);
@@ -128,8 +131,8 @@ body.light-mode .theme-toggle__icon--sun{display:inline;color:#8c6f4a}
 }
 
 /* Buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border-radius:0;padding:1rem 2.2rem;border:1px solid transparent;background:var(--accent);color:#07070a;font-weight:500;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;transition:transform 200ms,background 200ms,box-shadow 200ms;cursor:pointer}
-.btn:hover,.btn:focus-visible{transform:translateY(-2px);background:var(--accent-light);box-shadow:0 8px 30px rgba(200,184,154,.22)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border-radius:0;padding:1rem 2.2rem;border:1px solid #ffffff;background:#0a0a0a;color:#ffffff;font-weight:600;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;transition:transform 200ms,background 200ms,box-shadow 200ms;cursor:pointer}
+.btn:hover,.btn:focus-visible{transform:translateY(-2px);background:#1a1a1a;box-shadow:0 8px 30px rgba(0,0,0,.5)}
 .btn--ghost{background:transparent;border-color:var(--line-strong);color:var(--text)}
 .btn--ghost:hover{background:var(--accent-dim);border-color:var(--accent);color:var(--accent-light);box-shadow:none}
 .btn--small{padding:.65rem 1.2rem;font-size:.75rem}
