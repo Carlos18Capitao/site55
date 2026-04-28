@@ -494,6 +494,13 @@ body.light-mode .theme-toggle__icon--sun {
 }
 
 /* Hero */
+.hero {
+  background-image: url('assets/images/door.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .hero__grid,
 .booking-layout {
   display: grid;
@@ -502,11 +509,16 @@ body.light-mode .theme-toggle__icon--sun {
 
 .hero__grid {
   min-height: calc(100svh - 80px);
-  align-items: center
+  align-items: center;
+  justify-items: center
 }
 
 .hero__content {
-  padding-top: 2rem
+  padding-top: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center
 }
 
 .hero__lead {
@@ -1345,13 +1357,12 @@ body.light-mode .site-footer__logo--dark {
 
 @media (min-width:760px) {
 
-  .hero__grid,
-  .booking-layout {
-    grid-template-columns: 1.1fr .9fr;
-    align-items: center
+  .hero__grid {
+    grid-template-columns: 1fr
   }
 
   .booking-layout {
+    grid-template-columns: 1.1fr .9fr;
     align-items: start
   }
 
