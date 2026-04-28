@@ -220,7 +220,7 @@ h3 {
   letter-spacing: .22em;
   font-size: .72rem;
   font-weight: 500;
-  margin: 0 0 .5rem
+  margin: 0 0 .5rem;
 }
 
 /* Header */
@@ -520,6 +520,13 @@ body.light-mode .theme-toggle__icon--sun {
   flex-direction: column;
   align-items: center;
   background: rgba(255, 255, 255, .2);
+}
+
+.hero .eyebrow {
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  color: #000000;
+  -webkit-text-stroke: 1px #ffffff;
+  text-stroke: 1px #ffffff;
 }
 
 .hero__lead {
