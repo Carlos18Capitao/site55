@@ -498,7 +498,7 @@ body.light-mode .theme-toggle__icon--sun {
   background-image: url('assets/images/door.svg');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center calc(50% - 60px);
 }
 
 .hero__grid,
@@ -514,11 +514,12 @@ body.light-mode .theme-toggle__icon--sun {
 }
 
 .hero__content {
-  padding-top: 2rem;
+  padding: 2rem;
   text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center
+  align-items: center;
+  background: rgba(255, 255, 255, .2);
 }
 
 .hero__lead {
