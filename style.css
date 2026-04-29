@@ -450,16 +450,15 @@ body.light-mode .theme-toggle__icon--sun {
 /* Hero */
 .hero {
   background-image: url('assets/images/door.svg');
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center calc(50% - 60px);
 }
 
 @media (max-width: 759px) {
   .hero {
-    background-size: auto 90%;
-    background-position: center calc(40% - 80px);
-  
+    background-size: cover;
+    background-position: center calc(50% - 60px);
   }
 }
 
